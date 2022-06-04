@@ -1,0 +1,55 @@
+<section>
+  <h4 class="text-center">Formulario de Contacto </h4>
+  <p>Nombre: {{(selected$ | async)?.nombre}} </p>
+  <form (ngSubmit)="onFormulario()" [formGroup]="formContacto" >
+    <div class="mb-4">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="First name" name="name" required formControlName="name">
+      <div *ngIf="formContacto.get('name')?.touched && formContacto.get('name')?.errors?.['required']" class="alert alert-danger">
+        Campo requerido
+      </div>
+      <div *ngIf="formContacto.get('name')?.touched && formContacto.get('name')?.errors?.['minlength']" class="alert alert-danger">
+        Debes agregar al menos 3 campos
+      </div>
+    </div>
+
+    <div class="mb-4 form-check">
+      <label for="checkEdad" class="form-label">¿Eres mayor de edad?</label>
+      <input class="form-check-input" type="checkbox" value="" id="checkEdad" name="checkEdad" formControlName="checkEdad">
+<!--       <div [hidden]="checkEdad.valid || checkEdad.pristine" class="alert alert-danger">
+        Campo requerido
+      </div>
+ -->    </div>
+
+    <div class="mb-4">
+      <label for="departamento" class="form-label">Departamento:</label>
+      <select name="departamento" id="departamento" class="form-select" formControlName="departamento">
+        <option selected>Seleccione su departamento</option>
+        <option *ngFor="let departamento of obtener" [value]="departamento"> {{departamento}} </option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="comentario" class="form-label">Comentario</label>
+      <textarea class="form-control" name="comentario" id="comentario" rows="3" formControlName="comentario" required></textarea>
+      <div *ngIf="formContacto.get('comentario')?.touched && formContacto.get('comentario')?.errors?.['required']" class="alert alert-danger">
+        Campo requerido
+      </div>
+
+      <div *ngIf="formContacto.get('comentario')?.touched && formContacto.get('comentario')?.errors?.['minlength']" class="alert alert-danger">
+        Debes introducir al menos {{formContacto.get('comentario')?.touched && formContacto.get('comentario')?.errors?.['minlength']?.requiredLength}}
+        caracteres
+      </div>
+
+    </div>
+
+    <div class="d-grid gap-2 col-4 float-end">
+      <button type="submit" class="btn btn-info" [disabled]="formContacto.invalid">
+        Guardar
+      </button>
+    </div>
+
+  </form>
+</section>
+
+

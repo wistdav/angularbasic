@@ -1,0 +1,53 @@
+<!-- <pre> {{formContacto.value | json}} </pre>
+ -->
+<section>
+  <h4 class="text-center">Formulario de Contacto</h4>
+  <p>El identificador es: <strong> {{identificador}} </strong> </p>
+
+  <form (ngSubmit)="onSubmit(formContacto)" #formContacto="ngForm">
+    <div class="mb-4">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="First name" name="name" [(ngModel)]="modelo.name" required #name="ngModel">
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        Campo requerido
+      </div>
+    </div>
+
+    <div class="mb-4 form-check">
+      <label for="checkEdad" class="form-label">¿Eres mayor de edad?</label>
+      <input class="form-check-input" type="checkbox" value="" id="checkEdad" name="checkEdad" [(ngModel)]="modelo.checkEdad" #checkEdad="ngModel">
+      <div [hidden]="checkEdad.valid || checkEdad.pristine" class="alert alert-danger">
+        Campo requerido
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="departamento" class="form-label">Departamento:</label>
+      <select name="departamento" id="departamento" class="form-select" [(ngModel)]="modelo.departamento">
+        <option selected>Seleccione su departamento</option>
+        <option value="Valle del Cauca">Valle del Cauca</option>
+        <option value="Cauca">Cauca</option>
+        <option value="Antioquia">Antioquia</option>
+        <option value="Amazonas">Amazonas</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="comentario" class="form-label">Comentario</label>
+      <textarea class="form-control" name="comentario" id="comentario" rows="3" [(ngModel)]="modelo.comentario" #comentario="ngModel" required></textarea>
+      <div [hidden]="comentario.valid || comentario.pristine" class="alert alert-danger">
+        Campo requerido
+      </div>
+    </div>
+
+    <div class="d-grid gap-2 col-4 float-end">
+      <button type="submit" class="btn btn-info" [disabled]="formContacto.invalid">
+        Guardar
+      </button>
+    </div>
+
+  </form>
+</section>
+
+

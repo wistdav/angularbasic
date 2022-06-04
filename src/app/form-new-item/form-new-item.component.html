@@ -1,0 +1,11 @@
+<form>
+  <div class="row align-items-center">
+    <div class="col-auto p-1">
+      <input type="text" id="newItem" class="form-control" name="newItem" [ngModel]="selection?.nombre | titlecase" #textInput placeholder="{{label}}">
+    </div>
+    <div class="col-auto">
+      <button *ngIf="!selection?.nombre" (click)="onAgregar(textInput.value); textInput.value=''" type="button" class="btn" [ngClass]="[className]">Add</button>
+      <button *ngIf="selection?.nombre" (click)="onUpdate(selection,textInput.value); textInput.value=''" type="button" class="btn" [ngClass]="[className1]">Update</button>
+    </div>
+  </div>
+</form>
